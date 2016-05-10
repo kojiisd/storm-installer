@@ -1,3 +1,4 @@
+%define __check_files %{nil}
 Name: apache-storm	
 Version: 1.0.0
 Release: 1%{?dist}
@@ -40,15 +41,15 @@ exit 0
 %{__ln_s} /opt/storm-%{version} %{buildroot}/opt/storm
 
 #update default config
-echo "nimbus.host: \"localhost\"" >> %{buildroot}/opt/storm-%{version}/conf/storm.yaml
+echo "nimbus.seeds: [\"localhost\""] >> %{buildroot}/opt/storm-%{version}/conf/storm.yaml
 echo "" >> %{buildroot}/opt/storm-%{version}/conf/storm.yaml
 echo "storm.zookeeper.servers:" >> %{buildroot}/opt/storm-%{version}/conf/storm.yaml
 echo "     - \"localhost\"" >> %{buildroot}/opt/storm-%{version}/conf/storm.yaml
 echo "" >> %{buildroot}/opt/storm-%{version}/conf/storm.yaml
 echo "storm.local.dir: \"/opt/storm\"" >> %{buildroot}/opt/storm-%{version}/conf/storm.yaml
 
-#update logback config
-sed -i -e 's/${logfile\.name}/${storm.id:-storm}-${logfile.name}/g' %{buildroot}/opt/storm-%{version}/logback/cluster.xml
+#update log4j2 config
+sed -i -e 's/${logfile\.name}/${storm.id:-storm}-${logfile.name}/g' %{buildroot}/opt/storm-%{version}/log4j2/cluster.xml
 
 # Form a list of files for the files directive
 echo $(cd %{buildroot} && find . -type f | cut -c 2-) | tr ' ' '\n' > files.txt
@@ -73,7 +74,7 @@ rm -rf /opt/storm-%{version}
 exit 0
 
 %changelog
-* Mon May 9 2016 Acroquest Technology
+* Mon May 09 2016 Acroquest Technology
 - Apache-Storm 1.0.0 Packaging
 
 * Tue Nov 30 2014 Acroquest Technology
