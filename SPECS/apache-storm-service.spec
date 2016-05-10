@@ -1,10 +1,10 @@
 Name: apache-storm-service
-Version: 0.9.4
+Version: 1.0.0
 Release: 1%{?dist}
 Summary: Storm Complex Event Processing	Daemon Package
 Group: Applications/Internet
 License: Apache License Version 2.0
-Source: https://github.com/acromusashi/storm-installer/apache-storm-service-0.9.4.tgz
+Source: https://github.com/acromusashi/storm-installer/apache-storm-service-1.0.0.tgz
 URL: https://storm.apache.org/
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 Requires: apache-storm
@@ -74,6 +74,9 @@ fi
 exit 0
 
 %changelog
+* Mon May 09 2016 Acroquest Technology
+- Apache-Storm 1.0.0 Packaging
+
 * Tue Nov 30 2014 Acroquest Technology
 - Apache-Storm 0.9.3 Packaging
 
